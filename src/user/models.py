@@ -1,10 +1,10 @@
-import re
 from random import randrange
 
+import re
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
-from django.db.models import CASCADE, SET_NULL, ForeignKey
+from django.db.models import SET_NULL, ForeignKey
 
 from common.behaviours import UUIDable, Timestampable
 
@@ -45,18 +45,6 @@ class City(UUIDable, models.Model):
 
     class Meta:
         verbose_name_plural = 'cities'
-
-
-class Region(UUIDable, models.Model):
-    name = models.CharField(max_length=150)
-    city = models.ForeignKey(City, on_delete=CASCADE)
-
-    def __str__(self):
-        return self.uuid
-
-    def generate_uuid(self):
-        name = re.sub(r'\W+', '_', self.name).lower()
-        return f'region_{name}_{self.city_id}'
 
 
 class Nationality(models.Model):

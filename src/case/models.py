@@ -1,7 +1,7 @@
 from django.db.models import Model, ForeignKey, SET_NULL, BooleanField, TextField, CharField
 
 from common.behaviours import Timestampable
-from user.models import User, Region
+from user.models import User, City
 
 
 class Case(Timestampable, Model):
@@ -14,8 +14,10 @@ class Case(Timestampable, Model):
         (SEVERE, 'Severe')
     )
 
+    automatically_created = BooleanField(default=False)
+
     patient = ForeignKey(User, null=True, blank=True, on_delete=SET_NULL)
-    location = ForeignKey(Region, on_delete=SET_NULL, null=True, blank=True)
+    city = ForeignKey(City, on_delete=SET_NULL, null=True, blank=True)
     in_quarantine = BooleanField(default=True)
     is_tested_positive = BooleanField(default=False)
     is_hospitalized = BooleanField(default=False)

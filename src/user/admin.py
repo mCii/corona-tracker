@@ -2,7 +2,7 @@ from django.contrib.admin import register, ModelAdmin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-from user.models import User, City, Region, Nationality
+from user.models import User, City, Nationality
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -44,13 +44,6 @@ class CustomUserAdmin(UserAdmin):
 class CityAdmin(ModelAdmin):
     list_display = ('uuid', 'name',)
     fields = ('name',)
-    readonly_fields = ('uuid',)
-
-
-@register(Region)
-class RegionAdmin(ModelAdmin):
-    list_display = ('uuid', 'name', 'city',)
-    fields = ('name', 'city',)
     readonly_fields = ('uuid',)
 
 
